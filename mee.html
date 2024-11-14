@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ลอยกระทงกันนะหมี>_< </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #0d3b66;
+            overflow: hidden;
+            flex-direction: column;
+        }
+        .container {
+            text-align: center;
+            color: #ffffff;
+        }
+        .title {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .wish-box {
+            margin-bottom: 20px;
+        }
+        .wish-input {
+            padding: 10px;
+            width: 80%;
+            font-size: 1em;
+        }
+        .float-button {
+            padding: 10px 20px;
+            background-color: #f4a261;
+            color: white;
+            font-size: 1em;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .float-button:hover {
+            background-color: #e76f51;
+        }
+        .kratong {
+            position: absolute;
+            bottom: -100px;
+            animation: floatUp 5s ease-in-out forwards;
+            background: url('https://example.com/kratong.png') no-repeat center center;
+            background-size: contain;
+            width: 100px;
+            height: 100px;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+        .thank-you-message {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: #ffffff;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+        .thank-you-message.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">ลอยกระทงกันนะหมี>_< </div>
+        <div class="wish-box">
+            <input type="text" id="wish-input" class="wish-input" placeholder="คำอธิษฐาน">
+        </div>
+        <button onclick="floatKratong()" class="float-button">ปล่อยลอย</button>
+        <div id="thank-you-message" class="thank-you-message">ขอบคุณนะหมีรักมากๆเลยนะ</div>
+    </div>
+    
+    <script>
+        function floatKratong() {
+            const wish = document.getElementById('wish-input').value;
+            if (wish.trim() === "") {
+                alert("อธิษฐานก่อนนน");
+                return;
+            }
+            const kratong = document.createElement("div");
+            kratong.classList.add("kratong");
+            kratong.innerHTML = `<p style="color:white; font-size: 1.2em; text-align: center; margin: 0;">${wish}</p>`;
+            document.body.appendChild(kratong);
+            
+            // แสดงข้อความขอบคุณ
+            const thankYouMessage = document.getElementById("thank-you-message");
+            thankYouMessage.classList.add("show");
+
+            // ลบกระทงหลังจากผ่านไป 5 วินาที
+            setTimeout(() => {
+                kratong.remove();
+                // ซ่อนข้อความขอบคุณหลังจาก 3 วินาที
+                setTimeout(() => {
+                    thankYouMessage.classList.remove("show");
+                }, 3000);
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
